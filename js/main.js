@@ -44,43 +44,40 @@
 
    // Burger Menu
 	var burgerMenu = function() {
-		$('body').on('click', '.js-fh5co-nav-toggle', function(event) {
+
+		$('body').on('click', '.js-fh5co-nav-toggle', function(event){
+
 			event.preventDefault();
-	
-			// Toggle the 'active' class for the menu button
-			$(this).toggleClass('active');
-	
-			// Toggle the visibility of the navigation menu
-			$('#ftco-nav').toggleClass('show');
-	
-			// Close the menu if a navigation link is clicked
-			$('#ftco-nav a').on('click', function () {
-				$('.js-fh5co-nav-toggle').removeClass('active');
-				$('#ftco-nav').removeClass('show');
-			});
+
+			if ( $('#ftco-nav').is(':visible') ) {
+				$(this).removeClass('active');
+			} else {
+				$(this).addClass('active');	
+			}
+
+			
+			
 		});
+
 	};
 	burgerMenu();
 
 
 	var onePageClick = function() {
+
+
 		$(document).on('click', '#ftco-nav a[href^="#"]', function (event) {
-			event.preventDefault();
-	
-			var href = $.attr(this, 'href');
-	
-			$('html, body').animate({
-				scrollTop: $($.attr(this, 'href')).offset().top - 70
-			}, {
-				duration: 500,
-				easing: 'easeInOutExpo',
-				complete: function () {
-					// After scrolling, close the mobile menu if open
-					$('.js-fh5co-nav-toggle').removeClass('active');
-					$('#ftco-nav').removeClass('show');
-				}
-			});
+	    event.preventDefault();
+
+	    var href = $.attr(this, 'href');
+
+	    $('html, body').animate({
+	        scrollTop: $($.attr(this, 'href')).offset().top - 70
+	    }, 500, function() {
+	    	// window.location.hash = href;
+	    });
 		});
+
 	};
 
 	onePageClick();
